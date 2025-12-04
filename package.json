@@ -5,11 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist && cp dist/public/index.html dist/public/404.html",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist/public"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -79,6 +81,7 @@
     "add": "^2.0.6",
     "autoprefixer": "^10.4.20",
     "esbuild": "^0.25.0",
+    "gh-pages": "^6.3.0",
     "pnpm": "^10.15.1",
     "postcss": "^8.4.47",
     "prettier": "^3.6.2",
